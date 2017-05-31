@@ -41,4 +41,12 @@ public class ReplayKit {
 
     private Path mBinPath;
     private ADBCommand mADBCommad;
+
+    public static class AppetizerFailureException extends Exception {
+        private String mCmd;
+        public AppetizerFailureException(String cmd, String errMsg) {
+            super(errMsg);
+            mCmd = cmd;
+        }
+    }
 }
