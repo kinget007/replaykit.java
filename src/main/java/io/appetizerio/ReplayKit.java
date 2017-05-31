@@ -9,13 +9,8 @@ import java.nio.file.Paths;
  * Created by luoy on 2017/5/31.
  */
 public class ReplayKit {
-    public ReplayKit(String binBasePath) throws FileNotFoundException {
-        this("127.0.01", 5037, binBasePath);
-    }
 
-    public ReplayKit(String host, int port, String binBasePath) throws FileNotFoundException {
-        mADBHost = host;
-        mADBPort = port;
+    public ReplayKit(String binBasePath) throws FileNotFoundException {
         String targetBinName = null;
         String osName = System.getProperty("os.name").toLowerCase();
         if (osName.contains("mac") || osName.contains("darwin")) {
@@ -29,13 +24,21 @@ public class ReplayKit {
         }
         File targetFile = new File(binBasePath, targetBinName);
         if (targetFile.exists() && !targetFile.isDirectory()) {
-            mBinPath = Paths.get(binBasePath, targetBinName);
+            mBinPath = Paths.get(binBasePath, targetBinName).toAbsolutePath();
         } else {
             throw new FileNotFoundException();
         }
+
+        mADBCommad = new ADBCommand(mBinPath);
     }
 
-    private String mADBHost;
+    public void showDebugMessage() {
+        System.out.println(String.format("binary path: %s", mBinPath.toString()));
+    }
+    public ADBCommand ADB() {
+        return mADBCommad;
+    }
+
     private Path mBinPath;
-    private int mADBPort;
+    private ADBCommand mADBCommad;
 }
