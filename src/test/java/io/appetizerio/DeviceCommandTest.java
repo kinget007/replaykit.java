@@ -22,8 +22,10 @@ public class DeviceCommandTest {
     @Test
     public void control() throws Exception {
         ReplayKit kit = new ReplayKit(Util.BIN_PATH);
+//        String result = kit.Device().control(Arrays.asList(Util.TEST_DEVICE_SN, Util.TEST_DEVICE_SN_2),
+//                "shell", Arrays.asList("pm", "list", "packages"));
         String result = kit.Device().control(Arrays.asList(Util.TEST_DEVICE_SN, Util.TEST_DEVICE_SN_2),
-                "shell", Arrays.asList("pm", "list", "packages"));
+                "shell", Collections.singletonList("ls"));
         System.out.println(result);
     }
 
