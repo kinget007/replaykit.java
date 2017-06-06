@@ -30,6 +30,7 @@ public class ReplayKit {
         }
 
         mADBCommad = new ADBCommand(mBinPath);
+        mTrceCommand = new TraceCommand(mBinPath);
     }
 
     public void showDebugMessage() {
@@ -38,9 +39,11 @@ public class ReplayKit {
     public ADBCommand ADB() {
         return mADBCommad;
     }
+    public TraceCommand Trace() { return mTrceCommand; }
 
     private Path mBinPath;
     private ADBCommand mADBCommad;
+    private TraceCommand mTrceCommand;
 
     public static class AppetizerFailureException extends Exception {
         private String mCmd;

@@ -58,6 +58,14 @@ public class AppetizerCommand {
         return write.toString();
     }
 
+    RunningTaskControl executeCommandGetRunningTask(String... args) throws IOException {
+        String[] newArgs = new String[args.length + 1];
+        newArgs[0] = mbinPath.toString();
+        System.arraycopy(args, 0, newArgs, 1, args.length);
+        Process p = new ProcessBuilder().command(newArgs).start();
+        return new RunningTaskControl(args[0], p);
+    }
+
     void showErrorMessage(String msg) {
         System.err.println(msg);
     }

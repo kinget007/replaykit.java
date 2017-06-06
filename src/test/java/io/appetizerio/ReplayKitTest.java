@@ -21,7 +21,7 @@ public class ReplayKitTest {
 
         // valid path for my machine
         try {
-            ReplayKit kit = new ReplayKit("D:\\code\\appetizer\\appetizer-toolkit\\win32");
+            ReplayKit kit = new ReplayKit(Util.BIN_PATH);
             kit.showDebugMessage();
         } catch (FileNotFoundException e) {
             fail();

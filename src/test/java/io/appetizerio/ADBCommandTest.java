@@ -14,7 +14,7 @@ public class ADBCommandTest {
     @Test
     public void killServer() {
         try {
-            ReplayKit kit = new ReplayKit("D:\\code\\appetizer\\appetizer-toolkit\\win32");
+            ReplayKit kit = new ReplayKit(Util.BIN_PATH);
             System.out.println("check-server");
             String result = kit.ADB().checkServer();
             System.out.println(result);
@@ -42,7 +42,7 @@ public class ADBCommandTest {
     @Test
     public void startServer() {
         try {
-            ReplayKit kit = new ReplayKit("D:\\code\\appetizer\\appetizer-toolkit\\win32");
+            ReplayKit kit = new ReplayKit(Util.BIN_PATH);
             kit.ADB().startServer();
             String result = kit.ADB().checkServer();
             System.out.println(result);
@@ -61,7 +61,7 @@ public class ADBCommandTest {
     @Test
     public void checkServer() {
         try {
-            ReplayKit kit = new ReplayKit("D:\\code\\appetizer\\appetizer-toolkit\\win32");
+            ReplayKit kit = new ReplayKit(Util.BIN_PATH);
             String output = kit.ADB().checkServer();
             System.out.println(output);
             output = kit.ADB().checkServer("127.0.0.1:8080");
