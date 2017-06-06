@@ -5,6 +5,8 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.List;
+
+import com.google.common.base.Joiner;
 import org.apache.commons.io.IOUtils;
 
 /**
