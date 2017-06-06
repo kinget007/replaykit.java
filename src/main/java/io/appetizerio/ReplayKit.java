@@ -33,6 +33,7 @@ public class ReplayKit {
         mTrceCommand = new TraceCommand(mBinPath);
         mDeviceCommnad = new DeviceCommand(mBinPath);
         mPlanCommand = new PlanCommand(mBinPath);
+        mInsightCommand = new InsightCommand(mBinPath);
     }
 
     public void showDebugMessage() {
@@ -44,12 +45,14 @@ public class ReplayKit {
     public TraceCommand Trace() { return mTrceCommand; }
     public DeviceCommand Device() { return mDeviceCommnad; }
     public PlanCommand Plan() { return mPlanCommand; }
+    public InsightCommand Insight() { return mInsightCommand; }
 
     private Path mBinPath;
     private ADBCommand mADBCommad;
     private TraceCommand mTrceCommand;
     private DeviceCommand mDeviceCommnad;
     private PlanCommand mPlanCommand;
+    private InsightCommand mInsightCommand;
 
     public static class AppetizerFailureException extends Exception {
         private String mCmd;
