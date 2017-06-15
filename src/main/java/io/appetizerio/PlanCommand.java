@@ -15,21 +15,21 @@ public class PlanCommand extends AppetizerCommand {
     }
 
     public RunningTaskControl run(String planFile, String resultFolder, List<String> snList) throws IOException {
-        return run("127.0.0.1", 5037, planFile, resultFolder, snList, null);
+        return run(new ADBServer(), planFile, resultFolder, snList, null);
     }
 
     public RunningTaskControl run(String planFile, String resultFolder, List<String> snList, String reportUrl) throws IOException {
-        return run("127.0.0.1", 5037, planFile, resultFolder, snList, reportUrl);
+        return run(new ADBServer(), planFile, resultFolder, snList, reportUrl);
     }
 
-    public RunningTaskControl run(String host, int port, String planFile, String resultFolder,
+    public RunningTaskControl run(ADBServer server, String planFile, String resultFolder,
                                   List<String> snList, String reportUrl) throws IOException {
         String sn = Joiner.on(",").skipNulls().join(snList);
         if (reportUrl == null) {
-            return executeCommandGetRunningTask("plan", "run", "--host", host, "--port", String.valueOf(port),
+            return executeCommandGetRunningTask("plan", "run", "--host", server.getHost(), "--port", String.valueOf(server.getPort()),
                     planFile, resultFolder, sn);
         } else {
-            return executeCommandGetRunningTask("plan", "run", "--host", host, "--port", String.valueOf(port),
+            return executeCommandGetRunningTask("plan", "run", "--host", server.getHost(), "--port", String.valueOf(server.getPort()),
                     planFile, resultFolder, sn, "--report-url", reportUrl);
         }
     }

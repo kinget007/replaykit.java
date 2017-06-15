@@ -16,27 +16,27 @@ public class InsightCommand extends AppetizerCommand {
     }
 
     void fetchInsightLog(List<String> snList, String savePath, String pkg, boolean clear) throws InterruptedException, ReplayKit.AppetizerFailureException, IOException {
-        fetchInsightLog("127.0.0.1", 5037, snList, savePath, pkg, clear);
+        fetchInsightLog(new ADBServer(), snList, savePath, pkg, clear);
     }
 
-    void fetchInsightLog(String host, int port, List<String> snList, String savePath, String pkg, boolean clear) throws InterruptedException, ReplayKit.AppetizerFailureException, IOException {
+    void fetchInsightLog(ADBServer server, List<String> snList, String savePath, String pkg, boolean clear) throws InterruptedException, ReplayKit.AppetizerFailureException, IOException {
         String sn = Joiner.on(",").skipNulls().join(snList);
         if (clear) {
-            executeCommand("insight", "fetchlog", "--host", host, "--port", String.valueOf(port),
+            executeCommand("insight", "fetchlog", "--host", server.getHost(), "--port", String.valueOf(server.getPort()),
                     pkg, sn, savePath, "--clear");
         } else {
-            executeCommand("insight", "fetchlog", "--host", host, "--port", String.valueOf(port),
+            executeCommand("insight", "fetchlog", "--host", server.getHost(), "--port", String.valueOf(server.getPort()),
                     pkg, sn, savePath);
 
         }
     }
 
     void clearInsightLog(List<String> snList, String pkg) throws InterruptedException, ReplayKit.AppetizerFailureException, IOException {
-        clearInsightLog("127.0.0.1", 5037, snList, pkg);
+        clearInsightLog(new ADBServer(), snList, pkg);
     }
 
-    void clearInsightLog(String host, int port, List<String> snList, String pkg) throws InterruptedException, ReplayKit.AppetizerFailureException, IOException {
+    void clearInsightLog(ADBServer server, List<String> snList, String pkg) throws InterruptedException, ReplayKit.AppetizerFailureException, IOException {
         String sn = Joiner.on(",").skipNulls().join(snList);
-        executeCommand("insight", "clear", "--host", host, "--port", String.valueOf(port), pkg, sn);
+        executeCommand("insight", "clear", "--host", server.getHost(), "--port", String.valueOf(server.getPort()), pkg, sn);
     }
 }

@@ -15,7 +15,8 @@ public class ADBCommand extends AppetizerCommand {
     }
 
     public String checkServer() throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
-        return checkServer("127.0.0.1:5037");
+        ADBServer server = new ADBServer();
+        return checkServer(String.format("%s:%d", server.getHost(), server.getPort()));
     }
 
     public String checkServer(String ...addrList) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
@@ -27,40 +28,40 @@ public class ADBCommand extends AppetizerCommand {
     }
 
     public void startServer() throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
-        startServer("127.0.0.1", 5037);
+        startServer(new ADBServer());
     }
 
-    public void startServer(String host, int  port) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
+    public void startServer(ADBServer server) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
         executeCommand("adb", "start-server",
-                "--host", host, "--port", String.valueOf(port));
+                "--host", server.getHost(), "--port", String.valueOf(server.getPort()));
     }
 
     public void startServer(String pathToADB) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
-        startServer("127.0.0.1", 5037, pathToADB);
+        startServer(new ADBServer(), pathToADB);
     }
 
-    public void startServer(String host, int port, String pathToADB) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
+    public void startServer(ADBServer server, String pathToADB) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
         executeCommand("adb", "start-server",
-                "--host", host, "--port", String.valueOf(port),
+                "--host", server.getHost(), "--port", String.valueOf(server.getPort()),
                 "--adb", pathToADB);
     }
 
     public void killServer() throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
-        killServer("127.0.0.1", 5037);
+        killServer(new ADBServer());
     }
 
-    public void killServer(String host, int  port) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
+    public void killServer(ADBServer server) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
             executeCommand("adb", "kill-server",
-                    "--host", host, "--port", String.valueOf(port));
+                    "--host", server.getHost(), "--port", String.valueOf(server.getPort()));
     }
 
     public void killServer(String pathToADB) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
-        killServer("127.0.0.1", 5037, pathToADB);
+        killServer(new ADBServer(), pathToADB);
     }
 
-    public void killServer(String host, int port, String pathToADB) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
+    public void killServer(ADBServer server, String pathToADB) throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
         executeCommand("adb", "kill-server",
-                "--host", host, "--port", String.valueOf(port),
+                "--host", server.getHost(), "--port", String.valueOf(server.getPort()),
                 "--adb", pathToADB);
     }
 

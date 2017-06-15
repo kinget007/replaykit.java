@@ -16,34 +16,34 @@ public class TraceCommand extends AppetizerCommand {
     }
 
     public RunningTaskControl record(String traceFilePath) throws IOException {
-        return record("127.0.0.1", 5037, null, traceFilePath);
+        return record(new ADBServer(), null, traceFilePath);
     }
 
-    public RunningTaskControl record(String host, int port, String traceFilePath) throws IOException {
-        return record(host, port, null, traceFilePath);
+    public RunningTaskControl record(ADBServer server, String traceFilePath) throws IOException {
+        return record(server, null, traceFilePath);
     }
 
     public RunningTaskControl record(String deviceSn, String traceFilePath) throws IOException {
-        return record("127.0.0.1", 5037, deviceSn, traceFilePath);
+        return record(new ADBServer(), deviceSn, traceFilePath);
     }
 
-    public RunningTaskControl record(String host, int port, String deviceSn, String traceFilePath) throws IOException {
+    public RunningTaskControl record(ADBServer server, String deviceSn, String traceFilePath) throws IOException {
         if (deviceSn == null) {
-            return executeCommandGetRunningTask("trace", "record", "--port", String.valueOf(port), "--host",
-                    host, traceFilePath);
+            return executeCommandGetRunningTask("trace", "record", "--port", String.valueOf(server.getPort()), "--host",
+                    server.getHost(), traceFilePath);
         } else {
-            return executeCommandGetRunningTask("trace", "record", "--port", String.valueOf(port), "--host",
-                    host, "--device", deviceSn, traceFilePath);
+            return executeCommandGetRunningTask("trace", "record", "--port", String.valueOf(server.getPort()), "--host",
+                    server.getHost(), "--device", deviceSn, traceFilePath);
         }
     }
 
     public RunningTaskControl replay(String traceFilePath, String deviceSnList) throws IOException {
-        return replay("127.0.0.1", 5037, traceFilePath, deviceSnList);
+        return replay(new ADBServer(), traceFilePath, deviceSnList);
     }
 
 
-    public RunningTaskControl replay(String host, int port, String traceFilePath, String deviceSnList) throws IOException {
-        return executeCommandGetRunningTask("trace", "replay", "--host", host, "--port",
-                String.valueOf(port), traceFilePath, deviceSnList);
+    public RunningTaskControl replay(ADBServer server, String traceFilePath, String deviceSnList) throws IOException {
+        return executeCommandGetRunningTask("trace", "replay", "--host", server.getHost(), "--port",
+                String.valueOf(server.getPort()), traceFilePath, deviceSnList);
     }
 }
