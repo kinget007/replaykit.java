@@ -3,7 +3,6 @@ package io.appetizerio;
 import com.google.common.base.Joiner;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.nio.file.Path;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package io.appetizerio;
 
 import com.google.common.base.Joiner;
-import jdk.nashorn.internal.scripts.JO;
 
 import java.io.IOException;
 import java.nio.file.Path;
