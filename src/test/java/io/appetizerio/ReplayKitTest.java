@@ -22,7 +22,6 @@ public class ReplayKitTest {
         // valid path for my machine
         try {
             ReplayKit kit = new ReplayKit(Util.BIN_PATH);
-            kit.showDebugMessage();
         } catch (FileNotFoundException e) {
             fail();
         }
