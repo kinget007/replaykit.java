@@ -1,4 +1,4 @@
-language: java
+language: android
 os:
  - linux
 before_script:
