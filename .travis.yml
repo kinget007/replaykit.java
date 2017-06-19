@@ -7,3 +7,5 @@ before_script:
   - android-wait-for-emulator
   - git clone https://github.com/appetizerio/replaykit
   - export APPETIZER_TOOLKIT=replaykit
+script:
+  - ./gradlew check
