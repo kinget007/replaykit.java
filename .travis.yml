@@ -5,5 +5,5 @@ before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
-  - git clone git@github.com:appetizerio/replaykit.git
+  - git clone https://github.com/appetizerio/replaykit
   - export APPETIZER_TOOLKIT=replaykit
