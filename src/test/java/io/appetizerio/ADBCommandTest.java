@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import static org.junit.Assert.*;
 
@@ -28,32 +30,24 @@ public class ADBCommandTest {
             System.out.println("check-server");
             result = kit.ADB().checkServer();
             System.out.println(result);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ReplayKit.AppetizerFailureException e) {
-            System.out.println(e.getMessage());
+        } catch (InterruptedException | ReplayKit.AppetizerFailureException | IOException e) {
+            StringWriter writer = new StringWriter();
+            e.printStackTrace(new PrintWriter(writer));
+            fail(writer.toString());
         }
     }
 
     @Test
-    public void startServer() {
+    public void startServer() throws IOException {
         try {
             ReplayKit kit = new ReplayKit(Util.BIN_PATH);
             kit.ADB().startServer();
             String result = kit.ADB().checkServer();
             System.out.println(result);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ReplayKit.AppetizerFailureException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException | InterruptedException | ReplayKit.AppetizerFailureException e) {
+            StringWriter writer = new StringWriter();
+            e.printStackTrace(new PrintWriter(writer));
+            fail(writer.toString());
         }
 
     }
@@ -68,14 +62,10 @@ public class ADBCommandTest {
             System.out.println(output);
             output = kit.ADB().checkServer("127.0.0.1:8080", "127.0.0.1:8081");
             System.out.println(output);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ReplayKit.AppetizerFailureException e) {
-            e.printStackTrace();
+        } catch (InterruptedException | ReplayKit.AppetizerFailureException | IOException e) {
+            StringWriter writer = new StringWriter();
+            e.printStackTrace(new PrintWriter(writer));
+            fail(writer.toString());
         }
     }
 }

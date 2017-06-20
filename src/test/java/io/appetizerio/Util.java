@@ -1,5 +1,7 @@
 package io.appetizerio;
 
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -9,8 +11,8 @@ import java.nio.file.Paths;
 public class Util {
     public static String BIN_PATH;
     public static final String TRACE_FILE_NAME = "trace.zip";
-    public static final String TEST_DEVICE_SN = "9c91fa10";
-    public static final String TEST_DEVICE_SN_2 = "28ea91a07d53";
+    public static String TEST_DEVICE_SN;
+    public static String TEST_DEVICE_SN_2;
     public static final String SCREENSHOT_PATH = "test.png";
     public static final String TEST_PALN = Paths.get("test_data", "test_plan.txt").toAbsolutePath().toString();
     static {
@@ -26,5 +28,8 @@ public class Util {
         }
         Path path = Paths.get(appetizerHome, dirName);
         BIN_PATH = path.toString();
+
+        TEST_DEVICE_SN = System.getenv("DEVICE_SN1").trim();
+        TEST_DEVICE_SN_2 = System.getenv("DEVICE_SN2").trim();
     }
 }

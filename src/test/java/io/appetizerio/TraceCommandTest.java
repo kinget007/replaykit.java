@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +27,7 @@ public class TraceCommandTest {
         ReplayKit kit = null;
         try {
             kit = new ReplayKit(Util.BIN_PATH);
-            RunningTaskControl control = kit.Trace().record(Util.TRACE_FILE_NAME);
+            RunningTaskControl control = kit.Trace().record(Util.TEST_DEVICE_SN, Util.TRACE_FILE_NAME);
             for (int i = 0; i < 10; i ++) {
                 System.out.println(String.format("Sleeping %d seconds", i + 1));
                 Thread.sleep(1000);
@@ -34,18 +36,10 @@ public class TraceCommandTest {
             control.stop();
             String traceInfo = kit.Trace().getInfo(Util.TRACE_FILE_NAME);
             System.out.println(traceInfo);
-        } catch (FileNotFoundException e) {
-            fail();
-            e.printStackTrace();
-        } catch (IOException e) {
-            fail();
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            fail();
-            e.printStackTrace();
-        } catch (ReplayKit.AppetizerFailureException e) {
-            fail();
-            e.printStackTrace();
+        } catch (ReplayKit.AppetizerFailureException | IOException | InterruptedException e) {
+            StringWriter writer = new StringWriter();
+            e.printStackTrace(new PrintWriter(writer));
+            fail(writer.toString());
         }
     }
 }
