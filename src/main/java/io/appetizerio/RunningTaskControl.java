@@ -24,9 +24,6 @@ public class RunningTaskControl {
     void stop() throws IOException, InterruptedException, ReplayKit.AppetizerFailureException {
         OutputStream out = mProcess.getOutputStream();
         out.write("please quit\n".getBytes());
-        if (mProcess.isAlive()) {
-            out.flush();
-        }
         int exitCode = mProcess.waitFor();
         if (exitCode != 0) {
             StringWriter write = new StringWriter();
