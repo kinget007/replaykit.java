@@ -51,7 +51,7 @@ public class DeviceCommandTest {
             StringWriter writer = new StringWriter();
             e.printStackTrace(new PrintWriter(writer));
             String errMsg = writer.toString().trim();
-            if (!errMsg.startsWith("Exception AttributeError")) {
+            if (errMsg.indexOf("GeteventReader instance has no") == -1) {
                 fail(writer.toString());
             }
         }
