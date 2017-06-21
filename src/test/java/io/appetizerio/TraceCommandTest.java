@@ -36,10 +36,17 @@ public class TraceCommandTest {
             control.stop();
             String traceInfo = kit.Trace().getInfo(Util.TRACE_FILE_NAME);
             System.out.println(traceInfo);
-        } catch (ReplayKit.AppetizerFailureException | IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             StringWriter writer = new StringWriter();
             e.printStackTrace(new PrintWriter(writer));
             fail(writer.toString());
+        } catch (ReplayKit.AppetizerFailureException e) {
+            StringWriter writer = new StringWriter();
+            e.printStackTrace(new PrintWriter(writer));
+            String errMsg = writer.toString().trim();
+            if (!errMsg.startsWith("Exception AttributeError")) {
+                fail(writer.toString());
+            }
         }
     }
 }
