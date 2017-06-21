@@ -3,11 +3,12 @@ os:
  - linux
 before_script:
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+  - echo no | android create avd --force -n test2 -t android-21 --abi armeabi-v7a
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
   - emulator -avd test2 -no-audio -no-window &
   - android-wait-for-emulator
-  - git clone https://github.com/appetizerio/replaykit
+  - git clone --deptp=1 https://github.com/appetizerio/replaykit
   - export APPETIZER_TOOLKIT=replaykit
   - export DEVICE_SN1=emulator-5554
   - export DEVICE_SN2=emulator-5556
