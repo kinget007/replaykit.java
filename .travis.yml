@@ -9,7 +9,7 @@ before_script:
   - android-wait-for-emulator
   - git clone https://github.com/appetizerio/replaykit
   - export APPETIZER_TOOLKIT=replaykit
-  - export DEVICE_SN1=$(adb devices | awk 'NR==2 {print $1}')
-  - export DEVICE_SN2=$(adb devices | awk 'NR==3 {print $1}')
+  - export DEVICE_SN1=emulator-5554
+  - export DEVICE_SN2=emulator-5556
 script:
   - ./gradlew check
